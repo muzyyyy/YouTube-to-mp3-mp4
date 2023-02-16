@@ -33,3 +33,33 @@ if question.lower().startswith("v"):#video download
                 print("ok, Terminating")
                 exit()
 
+elif question.lower().startswith("a"):#audio download
+        while True:
+
+            print("Title: ", yt.title) #print youtube title
+            answer = input('Is this the title?(y/n): ') #Ask if given info is correct
+
+            if answer.lower().startswith("y"): #if yes then download video 
+                print('DOWNLOADING')
+                yda = yt.streams.get_audio_only()
+                print("Enter the destination or leave blank for current directory")
+                destination = str(input(">> ")) or '.'
+
+                # download the file
+                out_file = yda.download(output_path=destination)
+  
+                # save the file
+                base, ext = os.path.splitext(out_file)
+                new_file = base + '.mp3'
+                os.rename(out_file, new_file)
+
+                print('Succesfully Downloaded ', yt.title)
+                break
+
+            elif answer.lower().startswith("n"): #if no terminate code
+                print("ok, Terminating")
+                exit()
+
+else:
+    print('Wrong output, Terminating')
+    exit()
